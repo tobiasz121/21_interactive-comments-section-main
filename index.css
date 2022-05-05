@@ -1,0 +1,203 @@
+:root {
+    /* Colors */
+    --clr-dark-blue: #334253;
+    --clr-grayish-blue: #67727E;
+    --clr-v-light-gray: #F5F6FA;
+    --clr-light-gray: #E9EBF0;
+    --clr-white: #FFFFFF;
+    --clr-moderate-blue: #5357B6;
+    --clr-light-grayish-blue: #C5C6EF;
+    --clr-soft-red: #ED6368;
+    --clr-pale-red: #FFB8BB;
+   
+    /* Font-sizes */    
+    --fs-600: 1.5rem;    
+    --fs-400: 1rem;
+
+    /* Line height */
+    --lh-big: 1.5;
+    --lh-med: 1.166;
+
+    /* Font Weight */
+    --fw-bold: 600;
+
+    /* font-families */
+    --ff-rubik: 'Rubik', sans-serif;   
+
+}
+
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+body {
+    font-size: var(--fs-400);
+    font-weight: 400;
+    color: var(--clr-grayish-blue); 
+    background-color: var(--clr-v-light-gray);
+    font-family: var(--ff-rubik);
+    min-height: 100vh;        
+    line-height: var(--lh-med);
+    display: grid;
+    place-items: center;  
+}
+
+img,
+picture {
+    max-width: 100%;
+    display: block;
+}
+
+p {
+    margin: 0;
+}
+
+button {
+    padding: 0;
+    font-weight: 500;    
+}
+
+/* CUSTOM PROPERTIES */
+
+/* colors */
+
+.text-dark-blue {color: var(--clr-dark-blue)}
+.text-grayish-blue {color: var(--clr-grayish-blue)}
+.text-v-light-gray {color: var(--clr-v-light-gray)}
+.text-light-gray {color: var(--clr-light-gray)}
+.text-white {color: var(--clr-white)}
+.text-moderate-blue {color: var(--clr-moderate-blue)}
+.text-light-grayish-blue {color: var(--clr-light-grayish-blue)}
+.text-soft-red {color: var(--clr-soft-red)}
+.text-pale-red {color: var(--clr-pale-red)}
+
+.bg-dark-blue {background-color: var(--clr-dark-blue)}
+.bg-grayish-blue {background-color: var(--clr-grayish-blue)}
+.bg-v-light-gray {background-color: var(--clr-v-light-gray)}
+.bg-light-gray {background-color: var(--clr-light-gray)}
+.bg-white {background-color: var(--clr-white)}
+.bg-moderate-blue {background-color: var(--clr-moderate-blue)}
+.bg-light-grayish-blue {background-color: var(--clr-light-grayish-blue)}
+.bg-soft-red {background-color: var(--clr-soft-red)}
+.bg-pale-red {background-color: var(--clr-pale-red)}
+
+/* typography */
+
+.ff-rubi { font-family: var(--ff-rubik) }
+
+.uppercase { text-transform: uppercase; }
+
+.fs-600 { font-size: var(--fs-600); }
+.fs-400 { font-size: var(--fs-400); }
+
+.fw-bold { font-weight: var(--fw-bold); }
+
+.lh-big { line-height: var(--lh-big);}
+.lh-def { line-height: var(--lh-med);}
+
+/* Utility */
+.container {
+    max-width: 730px;
+}
+
+.grid {
+    display: grid;
+}
+
+.flex {
+    display: flex;
+}
+
+.flow > *:where(:not(:first-child)) {
+    margin-top: var(--flow-space, 1.5rem);    
+}
+
+
+/* Main Layout */
+
+.comment-container {
+    min-width: 100%;
+}
+
+.comment-inner {
+    background-color: var(--clr-white);
+    border-radius: 1rem;
+    padding-block: 1.5rem;
+    padding-inline: 1.5rem;
+    column-gap: 1.5rem;
+    row-gap: 1rem;
+    grid-template-columns: min-content 1fr 100px;
+    grid-template-areas: 'rating user reply'
+                         'rating text text'
+                         'rating text text'
+                         '. text text';
+    
+}
+
+.comment-inner > p{
+    grid-area: text
+}
+
+.comment-inner-rating {
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    grid-area: rating;
+    padding-inline: 0.7rem;
+    padding-block:0.3rem;
+    background-color: var(--clr-v-light-gray);
+    border-radius: 0.4rem;
+}
+
+.comment-inner-user {
+    align-items: center;
+    grid-area: user;
+    gap:0.85rem
+}
+
+.comment-inner-user > img {
+    width: 32px;
+    aspect-ratio: 1;
+}
+
+.comment-inner-reply {
+    grid-area: reply;
+    border: none;
+    background-color: transparent;
+    justify-content: flex-end;
+    gap:0.5rem;
+    align-items: center;
+}
+
+
+/* TEMPLATE AREAS */
+
+/* .comment-inner-rating {
+    grid-area: rating ;
+} */
+
+.comment-inner-user {
+    grid-area: user;
+}
+
+.replies-line {
+    min-width: clamp(30px, 6vw, 85px);
+    position: relative;
+}
+
+.replies-line::after {
+    content: ' ';
+    position: absolute;
+    background-color: var(--clr-light-gray);
+    width: 2px;
+    left: 50%;
+    min-height: 100%;
+
+}
+
+
+
+
+

@@ -3,24 +3,108 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- displays site properly based on user's device -->
-
-  <link rel="icon" type="image/png" sizes="32x32" href="./images/favicon-32x32.png">
-  
+  <link rel="icon" type="image/png" sizes="32x32" href="./images/favicon-32x32.png">  
   <title>Frontend Mentor | Interactive comments section</title>
-
-  <!-- Feel free to remove these styles or customise in your own stylesheet 👍 -->
-  <style>
-    .attribution { font-size: 11px; text-align: center; }
-    .attribution a { color: hsl(228, 45%, 44%); }
-  </style>
+  <link rel="stylesheet" href="https://meyerweb.com/eric/tools/css/reset/reset.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="./index.css">  
 </head>
 <body>
+  <main class="container flow">
+    <div class="comment-container">
+      <div class="comment-inner grid">
+        <div class="comment-inner-rating flex">
+          <img src="./images/icon-plus.svg" alt="">
+          <p class="text-moderate-blue fw-bold">12</p>
+          <img src="./images/icon-minus.svg" alt="">
+        </div>
+        <div class="comment-inner-user flex">
+          <img src="./images/avatars/image-amyrobson.png" alt="">
+          <p class="fw-bold text-dark-blue">amyrobson</p>
+          <p class="fh-big">1 month ago</p>
+        </div>
+        <button class="comment-inner-reply flex text-moderate-blue fw-bold">
+          <img src="./images/icon-reply.svg" alt="">
+          <p class="fs-400 fw-bold">Reply</p>
+        </button>
+        <p class="lh-big">
+          Impressive! Though it seems the drag feature could be improved. But overall it looks incredible. 
+          You’ve nailed the design and the responsiveness at various breakpoints works really well.
+        </p>       
+      </div>
+    </div>
+    <div class="comment-container flow">
+      <div class="comment-inner grid">
+        <div class="comment-inner-rating flex">
+          <img src="./images/icon-plus.svg" alt="">
+          <p class="text-moderate-blue fw-bold">5</p>
+          <img src="./images/icon-minus.svg" alt="">
+        </div>
+        <div class="comment-inner-user flex">
+          <img src="./images/avatars/image-maxblagun.png" alt="">
+          <p class="fw-bold text-dark-blue">maxblagun</p>
+          <p class="fh-big">2 weeks ago</p>
+        </div>
+        <button class="comment-inner-reply flex text-moderate-blue">
+          <img src="./images/icon-reply.svg" alt="">
+          <p class="fs-400 fw-bold">Reply</p>
+        </button>
+        <p class="lh-big">
+          Woah, your project looks awesome! How long have you been coding for? I’m still new, but think I want to dive into React as well soon. 
+          Perhaps you can give me an insight on where I can learn React? Thanks!
+        </p>       
+      </div>
+      <div class="replies flex">
 
-  <!-- Pull dynamic content from the data.json file -->
-  
-  <div class="attribution">
-    Challenge by <a href="https://www.frontendmentor.io?ref=challenge" target="_blank">Frontend Mentor</a>. 
-    Coded by <a href="#">Your Name Here</a>.
-  </div>
+        <div class="replies-line">
+        </div>        
+        <div class="flow">
+          <div class="comment-inner grid">
+            <div class="comment-inner-rating flex">
+              <img src="./images/icon-plus.svg" alt="">
+              <p class="text-moderate-blue fw-bold">4</p>
+              <img src="./images/icon-minus.svg" alt="">
+            </div>
+            <div class="comment-inner-user flex">
+              <img src="./images/avatars/image-ramsesmiron.png" alt="">
+              <p class="fw-bold text-dark-blue">ramsesmiron</p>
+              <p class="fh-big">1 week ago</p>
+            </div>
+            <button class="comment-inner-reply flex text-moderate-blue">
+              <img src="./images/icon-reply.svg" alt="">
+              <p class="fs-400 fw-bold">Reply</p>
+            </button>
+            <p class="lh-big">
+              @maxblagun If you’re still new, 
+              ’d recommend focusing on the fundamentals of HTML, CSS, and JS before considering React. It’s very tempting to jump ahead but lay a solid foundation first.
+            </p>       
+          </div>
+          <div class="comment-inner grid">
+            <div class="comment-inner-rating flex">
+              <img src="./images/icon-plus.svg" alt="">
+              <p class="text-moderate-blue fw-bold">2</p>
+              <img src="./images/icon-minus.svg" alt="">
+            </div>
+            <div class="comment-inner-user flex">
+              <img src="./images/avatars/image-juliusomo.png" alt="">
+              <p class="fw-bold text-dark-blue">juliusomo</p>
+              <p class="fh-big">2 days ago</p>
+            </div>
+            <button class="comment-inner-reply flex text-moderate-blue">
+              <img src="./images/icon-reply.svg" alt="">
+              <p class="fs-400 fw-bold">Reply</p>
+            </button>
+            <p class="lh-big">
+              @ramsesmiron I couldn’t agree more with this. 
+              Everything moves so fast and it always seems like everyone knows the newest library/framework. But the fundamentals are what stay constant.
+            </p>       
+          </div> 
+        </div>
+             
+      </div>
+    </div>  
+  </main> 
 </body>
 </html>
