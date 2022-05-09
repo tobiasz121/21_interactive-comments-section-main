@@ -59,6 +59,11 @@ button {
     font-weight: 500;    
 }
 
+span {
+    font-weight: 600;
+    color: var(--clr-moderate-blue);
+}
+
 /* CUSTOM PROPERTIES */
 
 /* colors */
@@ -134,7 +139,7 @@ button {
     padding-inline: 1.5rem;
     column-gap: 1.5rem;
     row-gap: 1rem;
-    grid-template-columns: min-content 1fr 100px;
+    grid-template-columns: min-content 1fr 200px;
     grid-template-areas: 'rating user reply'
                          'rating text text'
                          'rating text text'
@@ -194,8 +199,31 @@ button {
     align-items: center;
 }
 
+.comment-inner-change {
+    grid-area: reply;
+    gap:2rem;
+    justify-content: flex-end;
+}
+
+.button-change {
+    border:none;
+    background-color: transparent;
+    align-items: center;
+    gap:0.5rem;
+    cursor: pointer;
+}
+
+
 .comment-inner-reply:hover {
     cursor: pointer;
+}
+
+.comment-inner-reply[disabled]{
+    cursor: not-allowed;
+}
+
+.reply-section {
+    flex-grow: 2;
 }
 
 .comment-form {
