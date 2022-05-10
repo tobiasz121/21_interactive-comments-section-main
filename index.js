@@ -40,6 +40,8 @@ sendForm.addEventListener('click', event => {
     
 })
 
+
+// Manage state of the likes
 document.getElementById('main').addEventListener('click', event => {
     if(event.target && event.target.matches('.comment-inner-rating> img:first-child')){
         console.log('lastImg')                
@@ -56,7 +58,7 @@ document.getElementById('main').addEventListener('click', event => {
     }
 })
 
-
+// Remove main comment
 document.getElementById('main').addEventListener('click', event => {
     if(event.target && event.target.matches('.comment-main-delete, .comment-main-delete > *')){                
         console.log(event.target.parentNode.parentNode.parentNode.remove())
@@ -64,10 +66,10 @@ document.getElementById('main').addEventListener('click', event => {
     }
 })
 
-
+// Remove replies to the comments.
 document.getElementById('main').addEventListener('click', event => {
     if(event.target && event.target.matches('.comment-inner-delete, .comment-inner-delete > *')){ 
-        // checkReplies(event.target, 'delete')
+        // When delete button is clicked, open delete modal        
         const deletingCom = event.target
         console.log(modal)
         modal.style.display= 'flex'
@@ -175,11 +177,34 @@ const checkReplies = (clickedBtn, mode) => {
             clickedBtn.parentNode.parentNode.parentNode.remove()
         }      
     }   
-
 } 
 
 window.addEventListener('click', event => {
     if(event.target ==modal){
         modal.style.display = 'none'
     }
+})
+
+const api = document.querySelector('#api')
+
+const body = {
+    fields: {
+        name: { stringValue: '11' },
+        carbs: { integerValue: '12' },
+        protein: { integerValue:'12'},
+        fat: { integerValue: '12' }
+    }
+}
+
+api.addEventListener('click', event => {
+    fetch('https://firestore.googleapis.com/v1/projects/jsdemo-3f387/databases/(default)/documents/tobiaszdb/', {
+        method: 'post',
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(body),
+      }).then(response => response.json())
+      .then(data => {
+          console.log(data)
+      })
 })
