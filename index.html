@@ -29,28 +29,13 @@
         <button class="comment-inner-reply flex text-moderate-blue fw-bold">
           <img src="./images/icon-reply.svg" alt="">
           <p class="fs-400 fw-bold">Reply</p>
-        </button>
-        <!-- <div class="flex comment-inner-change">
-          <button class="comment-inner-delete button-change text-soft-red flex">
-            <img src="./images/icon-delete.svg" alt="">
-            <p class="fs-400 fw-bold">Delete</p>
-          </button>
-          <button class="comment-inner-edit button-change flex text-moderate-blue fw-bold">
-            <img src="./images/icon-edit.svg" alt="">
-            <p class="fs-400 fw-bold">Edit</p>
-          </button>
-        </div> -->
+        </button>        
         <p class="lh-big">
           Impressive! Though it seems the drag feature could be improved. But overall it looks incredible. 
           You’ve nailed the design and the responsiveness at various breakpoints works really well.
         </p>       
       </div>
-      <!-- <div class="replies flex">
-        <div class="replies-line">
-        </div>
-        <div class="flow reply-section">
-        </div>
-      </div> -->
+      
     </div>
     <div class="comment-container flow">      
       <div class="comment-inner grid">
@@ -124,12 +109,7 @@
           </div>          
         
         </div>             
-      </div>
-      <!-- <form action="" class="comment-inner comment-form flex hidden">
-        <img src="./images/avatars/image-juliusomo.png" alt="">        
-        <textarea name="" id="" cols="30" rows="7" placeholder="Add a comment..."></textarea>
-        <button type="submit" class="bg-moderate-blue fs-400 lh-big text-white ff-fubik">SEND</button>
-      </form> -->
+      </div>      
     </div> 
     <div class="comment-container">
       <form action="" class="comment-inner comment-form flex">
@@ -139,6 +119,20 @@
       </form>
     </div>
 
-  </main> 
+  </main>
+  <div id="modal" class="delete-modal">
+    <div class="delete-modal-content flow">
+      <h2 class="fs-600 fw-bold text-dark-blue">Delete Comment</h2>
+      <p class="lh-big">Are you sure you want to delete this comment? This will remove the comment and can’t be undone.</p>
+      <div class="flex">
+        <button class="delete-option-button fs-400 ff-rubik bg-grayish-blue">
+          NO, CANCEL
+        </button>
+        <button class="delete-option-button fs-400 lh-big ff-rubik bg-soft-red">
+          YES, DELETE
+        </button>
+      </div>
+    </div>
+  </div> 
 </body>
 </html>
