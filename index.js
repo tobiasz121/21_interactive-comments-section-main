@@ -7,7 +7,7 @@ let db = productdb('CommentsDb', {
 let replies = document.querySelectorAll('.comment-inner-reply')
 const sendForm = document.querySelector('.comment-submit')
 const modal = document.querySelector('.delete-modal')
-const main = document.querySelector('main')
+const main = document.querySelector('.main')
 
 const insertData =(bd,data) => {
     
