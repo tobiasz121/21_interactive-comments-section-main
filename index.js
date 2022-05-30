@@ -1,11 +1,46 @@
+import productdb, { bulkCreate, getData } from './module.js'
+
+let db = productdb('CommentsDb', {
+    comments: `++id,username, comment, reply, replyTo`
+})
+
 let replies = document.querySelectorAll('.comment-inner-reply')
 const sendForm = document.querySelector('.comment-submit')
 const modal = document.querySelector('.delete-modal')
+const main = document.querySelector('main')
+
+const insertData =(bd,data) => {
+    
+    bd.insertAdjacentHTML('afterbegin',`
+    <div class="comment-container flow">
+      <div class="comment-inner grid">
+        <div class="comment-inner-rating flex">
+          <img src="./images/icon-plus.svg" alt="">
+          <p class="text-moderate-blue fw-bold">12</p>
+          <img src="./images/icon-minus.svg" alt="">
+        </div>
+        <div class="comment-inner-user flex">
+          <img src="./images/avatars/image-amyrobson.png" alt="">
+          <p class="fw-bold text-dark-blue">amyrobson</p>
+          <p class="fh-big">1 month ago</p>
+        </div>
+        <button class="comment-inner-reply flex text-moderate-blue fw-bold">
+          <img src="./images/icon-reply.svg" alt="">
+          <p class="fs-400 fw-bold">Reply</p>
+        </button>        
+        <p class="lh-big">
+          ${data.comment}
+        </p>       
+      </div>
+      
+    </div>`)
+}
 
 // Search for all reply buttons and after clicking add fild with SEND option using insertAdjacentHTML
 
 sendForm.addEventListener('click', event => {
     event.preventDefault()
+    console.log(event.target.previousElementSibling.value)
     let commentText = event.currentTarget.previousElementSibling
     event.currentTarget.parentNode.parentNode.insertAdjacentHTML('beforebegin', `
     <div class="comment-container flow">    
@@ -33,9 +68,15 @@ sendForm.addEventListener('click', event => {
                     <p class="lh-big">
                     <span>@juliusomo</span> ${commentText.value} 
                     </p>       
-                </div>
-                </div>
+            </div>
+     </div>
     `)
+    let flag = bulkCreate(db.comments,{
+        username: 'lolek',
+        comment: event.target.previousElementSibling.value,
+        reply: 'false',
+        replyTo: '0'
+    })
     commentText.value = ''
     
 })
@@ -185,26 +226,20 @@ window.addEventListener('click', event => {
     }
 })
 
-const api = document.querySelector('#api')
-
-const body = {
-    fields: {
-        name: { stringValue: '11' },
-        carbs: { integerValue: '12' },
-        protein: { integerValue:'12'},
-        fat: { integerValue: '12' }
-    }
-}
-
-api.addEventListener('click', event => {
-    fetch('https://firestore.googleapis.com/v1/projects/jsdemo-3f387/databases/(default)/documents/tobiaszdb/', {
-        method: 'post',
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(body),
-      }).then(response => response.json())
-      .then(data => {
-          console.log(data)
-      })
+window.addEventListener('load', event => {
+    console.log('lol')
+    getData(db.comments, data =>{
+        console.log('lol2')
+        if(data){            
+            insertData(main, data)
+        }
+        else {
+            console.log('nothin')
+        }    
+    }) 
 })
+
+
+
+
+
