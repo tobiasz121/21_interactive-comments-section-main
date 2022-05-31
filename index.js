@@ -7,16 +7,16 @@ let db = productdb('CommentsDb', {
 let replies = document.querySelectorAll('.comment-inner-reply')
 const sendForm = document.querySelector('.comment-submit')
 const modal = document.querySelector('.delete-modal')
-const main = document.querySelector('.main')
+const main = document.querySelector('#main')
 
-const insertData =(bd,data) => {
-    
+
+const insertData =(bd,data) => {      
     bd.insertAdjacentHTML('afterbegin',`
-    <div class="comment-container flow">
+    <div data-id=${data.id} class="comment-container flow">
       <div class="comment-inner grid">
         <div class="comment-inner-rating flex">
           <img src="./images/icon-plus.svg" alt="">
-          <p class="text-moderate-blue fw-bold">12</p>
+          <p class="text-moderate-blue fw-bold">0</p>
           <img src="./images/icon-minus.svg" alt="">
         </div>
         <div class="comment-inner-user flex">
@@ -129,28 +129,27 @@ document.getElementById('main').addEventListener('click', event => {
 
 document.getElementById('main').addEventListener('click', event => {
     if(event.target && event.target.matches('.comment-inner-reply')){
-        console.log(event.target)
+        const id = event.target.parentNode.parentNode.dataset.id
+        console.log(id)  
         const repliedUser = event.target.previousElementSibling.children.item(1).textContent        
         const replyBtn = event.target
-        replies.forEach(reply => {
+        replies.forEach(reply => {     
             reply.disabled = true;
         })
-        //If there are no replies add replies container.
-        checkReplies(replyBtn, 'reply')
-        // replyBtn.disabled=true;
-        // Go up in the DOM tree and insert Comment
+        
+        checkReplies(replyBtn, 'reply')     //If there are no replies add replies container.
+
         const insertSend = event.target.parentNode.parentNode              
         insertSend.insertAdjacentHTML('beforeend', `
         <form action="" class="comment-inner comment-form flex">
         <img src="./images/avatars/image-juliusomo.png" alt="">        
         <textarea name="" id="" cols="30" rows="7" placeholder="Add a comment..."></textarea>
         <button type="submit" class="bg-moderate-blue fs-400 lh-big text-white reply-submit">REPLY</button>
-        </form>`)
+        </form>`)        
         
-        // Get replies container and then create a reply there
-        const newReply = event.target.parentNode.nextElementSibling.children.item(1)
-        //Search for the SEND button inside of the replied comment    
-        const sendComment = document.querySelectorAll('.reply-submit')   
+        const newReply = event.target.parentNode.nextElementSibling.children.item(1)    // Get replies container and then create a reply there
+         
+        const sendComment = document.querySelectorAll('.reply-submit')      //Search for the SEND button inside of the replied comment   
         sendComment.forEach(send => {
             send.addEventListener('click', event => {
                 // After clicking send, get text value, insert comment under parent comment, disable  comment.
@@ -186,6 +185,12 @@ document.getElementById('main').addEventListener('click', event => {
                         </p>       
                     </div>
                 </div>`)
+                let flag = bulkCreate(db.comments,{
+                    username: 'maxblagaun',
+                    comment: event.target.previousElementSibling.value,
+                    reply: 'true',
+                    replyTo: id
+                })
                 event.target.parentNode.remove()
                 replies.forEach(reply => {
                     reply.disabled = false;
@@ -227,11 +232,23 @@ window.addEventListener('click', event => {
 })
 
 window.addEventListener('load', event => {
-    console.log('lol')
-    getData(db.comments, data =>{
-        console.log('lol2')
-        if(data){            
-            insertData(main, data)
+    
+    getData(db.comments, data =>{        
+        if(data){
+            if(data.reply==='false'){
+                insertData(main, data) 
+            }
+            else {                
+              const coms = document.querySelectorAll('[data-id]')
+              coms.forEach(com => {
+                  console.log(com.dataset.id)
+                  if(com.dataset.id === data.replyTo){
+                      console.log('match')
+                  }
+                  
+              })
+            }                            
+                       
         }
         else {
             console.log('nothin')
@@ -239,6 +256,9 @@ window.addEventListener('load', event => {
     }) 
 })
 
+const findMainComment = () => {
+
+}
 
 
 

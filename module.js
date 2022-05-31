@@ -37,13 +37,13 @@ const bulkCreate = (dbtable, data) =>{
 
 const getData = (db, fn) => {
     let index = 0;
-    let obj = {};
+    let obj = {};    
     
-    db.count(cnt=> {        
-        if(cnt){
-            db.each(table => {
-                obj = sortObj(table)                
-                fn(obj, index++)
+    db.count(cnt=> { 
+              
+        if(cnt){            
+            db.each(table => {                                               
+                fn(table, index++)
             })
         }
         else {
@@ -51,6 +51,17 @@ const getData = (db, fn) => {
         }
     })
    
+}
+
+const sortObj = sortobj => {
+    let obj = {}
+    obj = {
+        id : sortobj.id,
+        name: sortobj.name,
+        seller: sortobj.seller,
+        price: sortobj.price
+    }
+    return obj
 }
 
 export default productdb;
