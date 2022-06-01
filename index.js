@@ -1,8 +1,9 @@
-import productdb, { bulkCreate, getData } from './module.js'
+import productdb, { bulkCreate, getData, getDate, decodeDate } from './module.js'
 
 let db = productdb('CommentsDb', {
-    comments: `++id,username, comment, reply, replyTo`
+    comments: `++id,username, comment, reply, replyTo, likes, date`
 })
+
 
 let replies = document.querySelectorAll('.comment-inner-reply')
 const sendForm = document.querySelector('.comment-submit')
@@ -75,7 +76,9 @@ sendForm.addEventListener('click', event => {
         username: 'lolek',
         comment: event.target.previousElementSibling.value,
         reply: 'false',
-        replyTo: '0'
+        replyTo: '0',
+        likes: '0',
+        date: getDate()
     })
     commentText.value = ''
     
@@ -189,7 +192,9 @@ document.getElementById('main').addEventListener('click', event => {
                     username: 'maxblagaun',
                     comment: event.target.previousElementSibling.value,
                     reply: 'true',
-                    replyTo: id
+                    replyTo: id,
+                    likes: '0',
+                    date: getDate()
                 })
                 event.target.parentNode.remove()
                 replies.forEach(reply => {
@@ -202,7 +207,20 @@ document.getElementById('main').addEventListener('click', event => {
 })
 
 
-const checkReplies = (clickedBtn, mode) => {    
+const checkReplies = (clickedBtn, mode) => {  
+    if (mode === 'load'){
+        if(clickedBtn.children.length < 2){
+            clickedBtn.insertAdjacentHTML('beforeend',`
+            <div class="replies flex">
+                <div class="replies-line">
+                </div>
+                <div class="flow reply-section">
+                </div>
+            </div>
+            `)
+        }       
+    }
+    
     if(mode==='reply'){
         if(clickedBtn.parentNode.parentNode.children.length < 2){
             clickedBtn.parentNode.parentNode.insertAdjacentHTML('beforeend', `
@@ -233,21 +251,49 @@ window.addEventListener('click', event => {
 
 window.addEventListener('load', event => {
     
-    getData(db.comments, data =>{        
+    getData(db.comments, data =>{          
+        decodeDate(data.date)
         if(data){
             if(data.reply==='false'){
                 insertData(main, data) 
             }
             else {                
-              const coms = document.querySelectorAll('[data-id]')
-              coms.forEach(com => {
-                  console.log(com.dataset.id)
-                  if(com.dataset.id === data.replyTo){
-                      console.log('match')
+              const coms = document.querySelectorAll('[data-id]')   //get all comments
+              coms.forEach(com => {                                //Check comment id and replyTo form data. If those value match - create reply in the comment.
+                if(com.dataset.id === data.replyTo){                                          
+                      checkReplies(com, 'load')                      
+                      com.children.item(1).children.item(1).insertAdjacentHTML('beforeend', `
+                <div class="comment-container flow">
+                    <div class="comment-inner grid">
+                        <div class="comment-inner-rating flex">
+                            <img src="./images/icon-plus.svg" alt="">
+                            <p class="text-moderate-blue fw-bold">4</p>
+                            <img src="./images/icon-minus.svg" alt="">
+                        </div>
+                        <div class="comment-inner-user flex">
+                            <img src="./images/avatars/image-juliusomo.png" alt="">
+                            <p class="fw-bold text-dark-blue">juliousomo</p>
+                            <p class="fh-big">X ago</p>
+                        </div>
+                        <div class="flex comment-inner-change">
+                            <button class="comment-inner-delete button-change text-soft-red flex">
+                                <img src="./images/icon-delete.svg" alt="">
+                                <p class="fs-400 fw-bold">Delete</p>
+                            </button>
+                            <button class="comment-inner-edit button-change flex text-moderate-blue fw-bold">
+                                <img src="./images/icon-edit.svg" alt="">
+                                <p class="fs-400 fw-bold">Edit</p>
+                            </button>
+                        </div>
+                        <p class="lh-big">
+                        <span>@${data.username}</span> ${data.comment} 
+                        </p>       
+                    </div>
+                </div>`)
                   }
                   
               })
-            }                            
+            }                           
                        
         }
         else {

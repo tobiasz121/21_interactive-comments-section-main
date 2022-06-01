@@ -64,7 +64,36 @@ const sortObj = sortobj => {
     return obj
 }
 
+const getDate = () => {
+    const cur = new Date()
+    return cur.toISOString()
+    
+}
+
+const decodeDate = (date) => {
+    let dateSource = date.split('T')
+    let datePart = dateSource[0]
+    let timePart = dateSource[1]
+    
+
+    let dateParts = datePart.split('-')
+    let yr = Number.parseInt(dateParts[0],10)
+    let mo = Number.parseInt(dateParts[1],10)   
+    let day = Number.parseInt(dateParts[2],10)  
+
+    let timeParts = timePart.split(':')
+    let hr = Number.parseInt(timeParts[0],10)
+    let min = Number.parseInt(timeParts[1],10)
+
+    const cur = new Date()
+
+    console.log(yr - cur.getFullYear())
+   
+    
+}
+
 export default productdb;
 export {
-    bulkCreate, getData
+    bulkCreate, getData, getDate, decodeDate
 }
+
